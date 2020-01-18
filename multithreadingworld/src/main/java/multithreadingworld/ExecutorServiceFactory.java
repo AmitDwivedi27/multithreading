@@ -1,5 +1,6 @@
 package multithreadingworld;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -48,12 +49,11 @@ public class ExecutorServiceFactory {
 		ExecutorService exs1 = exsFact.getExecutorService(3, "AIR");
 		System.out.println(exs.hashCode() == exs1.hashCode());
 
-		Runnable r1 = () -> System.out.println("Thread name " + Thread.currentThread().getName() + "   Runnbale 1");
-		Runnable r2 = () -> System.out.println("Thread name " + Thread.currentThread().getName() + "   Runnbale 2");
-		Runnable r3 = () -> System.out.println("Thread name " + Thread.currentThread().getName() + "   Runnbale 3");
-		Runnable r4 = () -> System.out.println("Thread name " + Thread.currentThread().getName() + "   Runnbale 4");
-		List<Runnable> runnableList = Arrays.asList(r1, r2, r3, r4);
-		runnableList.stream().forEach(r -> exs.submit(r));
+		List<Runnable> runnableList = new ArrayList<>();
+		for (int i = 0; i < 10; i++) {
+			Runnable r = () -> System.out.println(Thread.currentThread().getName() + " is working ");
+			runnableList.add(r);
+		}
 
 	}
 
